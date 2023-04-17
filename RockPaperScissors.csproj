@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\Components\Nav\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
