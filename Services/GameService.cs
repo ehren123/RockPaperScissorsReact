@@ -81,6 +81,7 @@ namespace RockPaperScissors.Services
             return await _context.Users
                 .AsNoTracking()
                 .OrderByDescending(u => u.Score)
+                .ThenByDescending(u => u.TotalGames)
                 .Select(u => new UserDto(u))
                 .ToListAsync();
         }
