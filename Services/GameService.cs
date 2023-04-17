@@ -92,7 +92,7 @@ namespace RockPaperScissors.Services
 
         private void UpdateUserStats(User user, Game game)
         {
-            user.TotalGames += 1;
+            user.TotalGames++;
 
             switch (game.Result)
             {
