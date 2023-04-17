@@ -26,7 +26,7 @@ export const Leaderboard: React.FC = () => {
             <h1>Leaderboard</h1>
             <div className="row">
                 <ul className="list-group">
-                    {users.map((user: User, index: number) => (<li>Rank: {index + 1} Name: {user.name}, Score: {user.score}, Games played: {user.totalGames}</li>))}
+                    {users.map((user: User, index: number) => (<li className="list-group-item">Rank: {index + 1} Name: {user.name}, Score: {user.score}, Games played: {user.totalGames}</li>))}
                 </ul>
             </div>
         </>
