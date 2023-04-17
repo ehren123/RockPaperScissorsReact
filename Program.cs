@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddDbContext<RockPaperScissorsDbContext>(o =>
-    o.UseInMemoryDatabase("RockPaperScissorsDb"));
+    o.UseSqlite("Data Source=RockPaperScissors.db"));
 
 builder.Services.AddTransient<IGameService, GameService>();
 

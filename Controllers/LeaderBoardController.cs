@@ -3,6 +3,8 @@ using RockPaperScissors.Services;
 
 namespace RockPaperScissors.Controllers
 {
+    using Dtos;
+
     [ApiController]
     [Route("api/[controller]")]
     public class LeaderBoardController : ControllerBase
@@ -15,10 +17,11 @@ namespace RockPaperScissors.Controllers
         }
 
         [HttpGet]
+        [Produces(typeof(List<UserDto>))]
         public async Task<IActionResult> GetLeaderBoard()
         {
-            var leaderBoard = await _gameService.GetLeaderBoard();
-            return Ok(leaderBoard);
+            var users = await _gameService.GetLeaderBoard();
+            return Ok(users);
         }
     }
 }
