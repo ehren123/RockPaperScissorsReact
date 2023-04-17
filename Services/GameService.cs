@@ -63,6 +63,7 @@ namespace RockPaperScissors.Services
             }
 
             var lastGamePlayed = await _context.Games
+                .AsNoTracking()
                 .Where(g => g.UserId == user.Id)
                 .OrderByDescending(g => g.Created)
                 .FirstOrDefaultAsync();
