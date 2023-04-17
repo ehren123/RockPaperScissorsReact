@@ -88,7 +88,7 @@ export const Play: React.FC = () => {
         <div className="row">
             <div className="col-12">
                 <div className="form-group">
-                    <label htmlFor="nameField">Label for Input Field</label>
+                    <label htmlFor="nameField">Enter your name</label>
                     <div className="input-group has-validation">
                     <input 
                         type="text" 
