@@ -4,7 +4,7 @@ import { User } from '../../Models/User';
 import { GameResult } from '../../Models/GameResult';
 import { Config } from '../../config';
 
-export const Play: React.FC = () => {
+const Play: React.FC = () => {
 
     const [name, setName] = useState<string | undefined>(undefined);
     const [nameChange, setNameChange] = useState<boolean>(false);
