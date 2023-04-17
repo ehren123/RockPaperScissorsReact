@@ -1,7 +1,8 @@
 import React from 'react';
 import { RockPaperScissors } from '../../Models/RockPaperScissors';
-import {User} from '../../Models/User';
+import { User } from '../../Models/User';
 import { GameResult } from '../../Models/GameResult';
+import { Config } from '../../Config';
 
 export const Play: React.FC = () => {
 
@@ -27,7 +28,7 @@ export const Play: React.FC = () => {
     async function createGame(heroChoice: RockPaperScissors): Promise<void> {
         setNameChange(false);
 
-        await fetch(process.env.API_BASE_URL + "/game", {
+        await fetch(Config.apiBaseUrl + "/game", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +41,7 @@ export const Play: React.FC = () => {
     }
 
     async function getUser(): Promise<void> {
-        const response = await fetch(process.env.API_BASE_URL + "/game/" + name, {
+        const response = await fetch(Config.apiBaseUrl + "/game" + name, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -113,8 +114,7 @@ export const Play: React.FC = () => {
                         id="nameField" 
                         placeholder="Enter value"
                         onChange={(e) => {
-                            setNameChange(true);
-                            setName(e.target.value)
+                            nameChanged(e.target.value);
                             }} />
                     </div>
                 </div>

@@ -91,6 +91,8 @@ namespace RockPaperScissors.Services
 
         private void UpdateUserStats(User user, Game game)
         {
+            user.TotalGames += 1;
+
             switch (game.Result)
             {
                 case GameResult.Win:
