@@ -74,27 +74,27 @@ export const Play: React.FC = () => {
         }
 
         if(user?.lastGameHeroChoice === RockPaperScissors.Rock){
-            text += 'You selected Rock, '
+            text += 'You selected rock, '
         }
 
         if(user?.lastGameHeroChoice === RockPaperScissors.Paper){
-            text += 'You selected Paper, '
+            text += 'You selected paper, '
         }
 
         if(user?.lastGameHeroChoice === RockPaperScissors.Scissors){
-            text += 'You selected Scissors, '
+            text += 'You selected scissors, '
         }
 
         if(user?.lastGameVillainChoice === RockPaperScissors.Rock){
-            text += 'the villain selected Rock.'
+            text += 'villain selected rock.'
         }
         
         if(user?.lastGameVillainChoice === RockPaperScissors.Paper){
-            text += 'the villain selected Paper.'
+            text += 'villain selected paper.'
         }
 
         if(user?.lastGameVillainChoice === RockPaperScissors.Scissors){
-            text += 'the villain selected Paper.'
+            text += 'villain selected scissors.'
         }
 
         text += ' Wins: ' + user?.wins + ' Losses: ' + user?.losses + ' Ties: ' + user?.ties + ' Total Games: ' + user?.totalGames + ' Score: ' + user?.score;

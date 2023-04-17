@@ -112,7 +112,7 @@ namespace RockPaperScissors.Services
         private RockPaperScissors GetComputerChoice()
         {
             var ran = new Random();
-            return (RockPaperScissors)ran.Next(0, 4);
+            return (RockPaperScissors)ran.Next(0, 3);
         }
 
         private void SetGameResult(Game game)

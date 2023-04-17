@@ -11,8 +11,8 @@ using RockPaperScissors.Entities;
 namespace RockPaperScissors.Migrations
 {
     [DbContext(typeof(RockPaperScissorsDbContext))]
-    [Migration("20230417133329_removeMinPlayerNameSize")]
-    partial class removeMinPlayerNameSize
+    [Migration("20230417133659_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
