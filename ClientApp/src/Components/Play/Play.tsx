@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RockPaperScissors } from '../../Models/RockPaperScissors';
 import { User } from '../../Models/User';
 import { GameResult } from '../../Models/GameResult';
@@ -6,19 +6,19 @@ import { Config } from '../../config';
 
 export const Play: React.FC = () => {
 
-    const [name, setName] = React.useState<string | undefined>(undefined);
-    const [playerChoice, setPlayerChoice] = React.useState<string | undefined>(undefined);
+    const [name, setName] = useState<string | undefined>(undefined);
+    // const [playerChoice, setPlayerChoice] = useState<string | undefined>(undefined);
     // const [wins, setWins] = React.useState<number>(0);
     // const [losses, setLosses] = React.useState<number>(0);
     // const [ties, setTies] = React.useState<number>(0);
     // const [totalGames, setTotalGames] = React.useState<number>(0);
     // const [score, setScore] = React.useState<number>(0);
-    const [nameChange, setNameChange] = React.useState<boolean>(false);
+    const [nameChange, setNameChange] = useState<boolean>(false);
     // const [lastVillainChoice, setLastVillainChoice] = React.useState<RockPaperScissors | undefined>(undefined);
     // const [lastHeroChoice, setLastHeroChoice] = React.useState<RockPaperScissors | undefined>(undefined);
     // const [lastResult, setLastResult] = React.useState<GameResult | undefined>(undefined);
 
-    const[lastGameText, setLastGameText] = React.useState<string | undefined>(undefined);
+    const [lastGameText, setLastGameText] = useState<string | undefined>(undefined);
 
     function nameChanged(name: string): void{
         setName(name);
@@ -64,7 +64,6 @@ export const Play: React.FC = () => {
     }
 
     function updateLastGameText(user: User){
-
         let text = 'Last Game: '
         if(user?.lastGameResult === GameResult.win){
             text+= 'You won! '

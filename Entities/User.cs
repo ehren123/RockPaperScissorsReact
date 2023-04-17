@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RockPaperScissors.Entities
+﻿namespace RockPaperScissors.Entities
 {
     /*
      * Although we could compute the score and total games from the wins, losses, and ties, we wish to be able to sort with this information in the database.
@@ -10,7 +8,6 @@ namespace RockPaperScissors.Entities
     {
         public Guid Id { get; set; }
 
-        [Required, MinLength(3)]
         public string Name { get; set; } = string.Empty;
 
         public int Wins { get; set; }
