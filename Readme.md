@@ -17,7 +17,7 @@ Press play in visual studio.
 
 # Limitations and possible improvements
 
-- This is not intended to be a secure application. As such coors is disabled and there is no authenticaiton.
+- This is not intended to be a secure application. As such cors is disabled and there is no authenticaiton.
 - The UX is rather basic but get's the job done.
 - React configuration done inside a typescript file.
 - Database connection string hard coded in backend application.
