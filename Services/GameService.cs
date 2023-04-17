@@ -1,11 +1,13 @@
-﻿using RockPaperScissors.Commands;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace RockPaperScissors.Services
 {
+    using Commands;
+    using Dtos;
     using Entities;
     using Enums;
 
-    public class GameService
+    public class GameService : IGameService
     {
         private readonly RockPaperScissorsDbContext _context;
 
@@ -24,9 +26,9 @@ namespace RockPaperScissors.Services
             {
                 user = new User
                 {
-                    Name = command.Name,
-                    Created = DateTime.UtcNow,
-                    Id = Guid.NewGuid()
+                    Id = Guid.NewGuid(),
+                    Name = command.Name.Trim(),
+                    Created = DateTime.UtcNow
                 };
 
                 await _context.AddAsync(user);
@@ -34,6 +36,7 @@ namespace RockPaperScissors.Services
 
             var game = new Game
             {
+                Id = Guid.NewGuid(),
                 User = user,
                 Created = DateTime.UtcNow,
                 HeroChoice = command.HeroChoice,
@@ -48,14 +51,54 @@ namespace RockPaperScissors.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<UserDto?> GetUserByName(string name)
+        {
+            var user = await _context.Users
+                .AsNoTracking()
+                .SingleOrDefaultAsync(u => u.Name == name.Trim());
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var lastGamePlayed = await _context.Games
+                .Where(g => g.UserId == user.Id)
+                .OrderByDescending(g => g.Created)
+                .FirstOrDefaultAsync();
+
+            var dto = new UserDto(user);
+
+            // We add the results of the last game if it exists.
+            if (lastGamePlayed != null)
+            {
+                dto.LastGameHeroChoice = lastGamePlayed.HeroChoice;
+                dto.LastGameVillainChoice = lastGamePlayed.VillainChoice;
+                dto.LastGameResult = lastGamePlayed.Result;
+            }
+
+            return dto;
+        }
+
+        public async Task<List<UserDto>> GetLeaderBoard()
+        {
+            return await _context.Users
+                .AsNoTracking()
+                .OrderByDescending(u => u.Score)
+                .Select(u => new UserDto(u))
+                .ToListAsync();
+        }
+
         private void UpdateUserStats(User user, Game game)
         {
             switch (game.Result)
             {
                 case GameResult.Win:
+                    user.Score++;
                     user.Wins++;
                     break;
                 case GameResult.Loss:
+                    user.Score--;
                     user.Losses++;
                     break;
                 case GameResult.Tie:

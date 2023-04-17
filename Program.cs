@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RockPaperScissors.Entities;
+using RockPaperScissors.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<RockPaperScissorsDbContext>(o =>
     o.UseInMemoryDatabase("RockPaperScissorsDb"));
+
+builder.Services.AddTransient<IGameService, GameService>();
 
 builder.Services.AddControllersWithViews();
 
