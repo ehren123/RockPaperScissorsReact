@@ -7,6 +7,7 @@ namespace RockPaperScissors.Entities
         public RockPaperScissorsDbContext(DbContextOptions<RockPaperScissorsDbContext> options)
             : base(options)
         {
+            Database.Migrate();
         }
 
         public DbSet<Game> Games { get; set; }
