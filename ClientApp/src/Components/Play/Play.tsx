@@ -2,7 +2,7 @@ import React from 'react';
 import { RockPaperScissors } from '../../Models/RockPaperScissors';
 import { User } from '../../Models/User';
 import { GameResult } from '../../Models/GameResult';
-import { Config } from '../../Config';
+import { Config } from '../../config';
 
 export const Play: React.FC = () => {
 
@@ -28,20 +28,22 @@ export const Play: React.FC = () => {
     async function createGame(heroChoice: RockPaperScissors): Promise<void> {
         setNameChange(false);
 
-        await fetch(Config.apiBaseUrl + "/game", {
+        await fetch(Config.apiBaseUrl + "game", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 name: name,
-                heroChoice: playerChoice,
+                heroChoice: heroChoice,
             }),
         });
+
+        await getUser();
     }
 
     async function getUser(): Promise<void> {
-        const response = await fetch(Config.apiBaseUrl + "/game" + name, {
+        const response = await fetch(Config.apiBaseUrl + "game/" + name, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -96,7 +98,7 @@ export const Play: React.FC = () => {
             text += 'the villain selected Paper.'
         }
 
-        text += 'Wins: ' + user?.wins + ' Losses: ' + user?.losses + ' Ties: ' + user?.ties + ' Total Games: ' + user?.totalGames + ' Score: ' + user?.score;
+        text += ' Wins: ' + user?.wins + ' Losses: ' + user?.losses + ' Ties: ' + user?.ties + ' Total Games: ' + user?.totalGames + ' Score: ' + user?.score;
 
         setLastGameText(text);
     }
@@ -112,7 +114,7 @@ export const Play: React.FC = () => {
                         type="text" 
                         className="form-control" 
                         id="nameField" 
-                        placeholder="Enter value"
+                        placeholder="Enter your name"
                         onChange={(e) => {
                             nameChanged(e.target.value);
                             }} />
@@ -127,9 +129,9 @@ export const Play: React.FC = () => {
                 <button type="button" className="btn btn-primary col" onClick={(e) => createGame(RockPaperScissors.Scissors)}>Scissors</button>
             </div>}
         <br />
-        {name && nameChange && 
+        {name && !nameChange && 
             <div className="row">
-                <p></p>
+                <p>{lastGameText}</p>
             </div>}
         </>
     );

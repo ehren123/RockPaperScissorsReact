@@ -1,4 +1,4 @@
 export class Config
 {
-    static readonly apiBaseUrl = 'https://localhost:46426/api/';
+    static readonly apiBaseUrl = 'http://localhost:5099/api/';
 }
