@@ -54,6 +54,7 @@ namespace RockPaperScissors.Services
         public async Task<UserDto?> GetUserByName(string name)
         {
             var user = await _context.Users
+                .Include(u => u.Games.OrderByDescending(g => g.Created).Take(1))
                 .AsNoTracking()
                 .SingleOrDefaultAsync(u => u.Name == name.Trim());
 
@@ -62,20 +63,14 @@ namespace RockPaperScissors.Services
                 return null;
             }
 
-            var lastGamePlayed = await _context.Games
-                .AsNoTracking()
-                .Where(g => g.UserId == user.Id)
-                .OrderByDescending(g => g.Created)
-                .FirstOrDefaultAsync();
-
             var dto = new UserDto(user);
 
             // We add the results of the last game if it exists.
-            if (lastGamePlayed != null)
+            if (user.Games.Any())
             {
-                dto.LastGameHeroChoice = lastGamePlayed.HeroChoice;
-                dto.LastGameVillainChoice = lastGamePlayed.VillainChoice;
-                dto.LastGameResult = lastGamePlayed.Result;
+                dto.LastGameHeroChoice = user.Games[0].HeroChoice;
+                dto.LastGameVillainChoice = user.Games[0].VillainChoice;
+                dto.LastGameResult = user.Games[0].Result;
             }
 
             return dto;
