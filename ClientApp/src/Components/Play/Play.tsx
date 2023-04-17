@@ -3,6 +3,7 @@ import { RockPaperScissors } from '../../Models/RockPaperScissors';
 import { User } from '../../Models/User';
 import { GameResult } from '../../Models/GameResult';
 import { Config } from '../../config';
+import { CreateGameCommand } from '../../Models/CreateGameCommand';
 
 const Play: React.FC = () => {
 
@@ -18,15 +19,21 @@ const Play: React.FC = () => {
     async function createGame(heroChoice: RockPaperScissors): Promise<void> {
         setNameChange(false);
 
+        if(!name){
+            throw new Error("Name is required");
+        }
+
+        const command: CreateGameCommand = {
+            name: name,
+            heroChoice: heroChoice
+        }
+
         await fetch(Config.apiBaseUrl + "game", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                name: name,
-                heroChoice: heroChoice,
-            }),
+            body: JSON.stringify(command)
         });
 
         await getUser();
