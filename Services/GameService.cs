@@ -46,7 +46,7 @@ namespace RockPaperScissors.Services
             SetGameResult(game);
             await _context.AddAsync(game);
 
-            UpdateUserStats(user, game);
+            await UpdateUserStats(user, game);
 
             await _context.SaveChangesAsync();
         }
@@ -86,8 +86,13 @@ namespace RockPaperScissors.Services
                 .ToListAsync();
         }
 
-        private void UpdateUserStats(User user, Game game)
+        private async Task UpdateUserStats(User user, Game game)
         {
+            if (user.TotalGames % 20 == 0)
+            {
+                await PeriodicResync(user);
+            }
+
             user.TotalGames++;
 
             switch (game.Result)
@@ -104,6 +109,30 @@ namespace RockPaperScissors.Services
                     user.Ties++;
                     break;
             }
+        }
+
+        // Sometimes we need to resync the user stats to guarantee reliability.
+        private async Task PeriodicResync(User user)
+        {
+            var stats = await _context.Games
+                .AsNoTracking()
+                .Where(g => g.UserId == user.Id)
+                .GroupBy(g => g.UserId)
+                .Select(g => new
+                {
+                    TotalGames = g.Count(),
+                    Wins = g.Count(g => g.Result == GameResult.Win),
+                    Losses = g.Count(g => g.Result == GameResult.Loss),
+                    Ties = g.Count(g => g.Result == GameResult.Tie),
+                    Score = g.Sum(g => g.Result == GameResult.Win ? 1 : g.Result == GameResult.Loss ? -1 : 0)
+                })
+                .SingleOrDefaultAsync();
+
+            user.TotalGames = stats?.TotalGames ?? 0;
+            user.Wins = stats?.Wins ?? 0;
+            user.Losses = stats?.Losses ?? 0;
+            user.Ties = stats?.Ties ?? 0;
+            user.Score = stats?.Score ?? 0;
         }
 
         private RockPaperScissors GetComputerChoice()
