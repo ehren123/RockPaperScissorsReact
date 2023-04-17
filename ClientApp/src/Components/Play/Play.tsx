@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RockPaperScissors } from '../../Models/RockPaperScissors';
 import { User } from '../../Models/User';
 import { GameResult } from '../../Models/GameResult';
-import { Config } from '../../config';
+import { Config } from '../../Config';
 import { CreateGameCommand } from '../../Models/CreateGameCommand';
 
 const Play: React.FC = () => {

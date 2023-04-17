@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User } from '../../Models/User';
-import { Config } from '../../config';
+import { Config } from '../../Config';
 
 const Leaderboard: React.FC = () => {
 
