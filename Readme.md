@@ -1,6 +1,6 @@
 # Introduction
 
-This is a simple rock paper scissors game. Games are stored to a database.
+This is a simple rock paper scissors game. Games are stored to a database. There is a leaderboard as well.
 
 # Technologies
 
