@@ -111,9 +111,9 @@ const Play: React.FC = () => {
         </div>
         {name &&
             <div className="row">
-                <button type="button" className="btn btn-primary col" onClick={(e) => createGame(RockPaperScissors.Rock)}>Rock</button>
-                <button type="button" className="btn btn-primary col" onClick={(e) => createGame(RockPaperScissors.Paper)}>Paper</button>
-                <button type="button" className="btn btn-primary col" onClick={(e) => createGame(RockPaperScissors.Scissors)}>Scissors</button>
+                <button type="button" className="btn btn-primary col" onClick={() => createGame(RockPaperScissors.Rock)}>Rock</button>
+                <button type="button" className="btn btn-primary col" onClick={() => createGame(RockPaperScissors.Paper)}>Paper</button>
+                <button type="button" className="btn btn-primary col" onClick={() => createGame(RockPaperScissors.Scissors)}>Scissors</button>
             </div>}
         <br />
         {name && !nameChange && 
