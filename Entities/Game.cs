@@ -15,5 +15,7 @@
         public DateTime Created { get; set; }
 
         public GameResult Result { get; set; }
+
+        public User User { get; set; }
     }
 }

@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using RockPaperScissors.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<RockPaperScissorsDbContext>(o =>
+    o.UseInMemoryDatabase("RockPaperScissorsDb"));
 
 builder.Services.AddControllersWithViews();
 
@@ -16,7 +22,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",

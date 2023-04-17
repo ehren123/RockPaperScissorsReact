@@ -3,10 +3,10 @@
 
     using Enums;
 
-    public class AddGameCommand
+    public class CreateGameCommand
     {
         public string Name { get; set; }
 
-        public GameResult HeroChoice { get; set; }
+        public RockPaperScissors HeroChoice { get; set; }
     }
 }
