@@ -1,3 +1,7 @@
+# Demo
+
+[Live demo](https://rock-paper-scissors-react.azurewebsites.net/)
+
 # Introduction
 
 This is a simple rock paper scissors game. Games are stored to a database. There is a leaderboard as well.
