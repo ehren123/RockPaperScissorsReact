@@ -7,17 +7,7 @@ import { Config } from '../../config';
 export const Play: React.FC = () => {
 
     const [name, setName] = useState<string | undefined>(undefined);
-    // const [playerChoice, setPlayerChoice] = useState<string | undefined>(undefined);
-    // const [wins, setWins] = React.useState<number>(0);
-    // const [losses, setLosses] = React.useState<number>(0);
-    // const [ties, setTies] = React.useState<number>(0);
-    // const [totalGames, setTotalGames] = React.useState<number>(0);
-    // const [score, setScore] = React.useState<number>(0);
     const [nameChange, setNameChange] = useState<boolean>(false);
-    // const [lastVillainChoice, setLastVillainChoice] = React.useState<RockPaperScissors | undefined>(undefined);
-    // const [lastHeroChoice, setLastHeroChoice] = React.useState<RockPaperScissors | undefined>(undefined);
-    // const [lastResult, setLastResult] = React.useState<GameResult | undefined>(undefined);
-
     const [lastGameText, setLastGameText] = useState<string | undefined>(undefined);
 
     function nameChanged(name: string): void{
@@ -52,15 +42,6 @@ export const Play: React.FC = () => {
 
         const user: User = await response.json() as User;
         updateLastGameText(user);
-
-        // setWins(user.wins);
-        // setLosses(user.losses);
-        // setTies(user.ties);
-        // setTotalGames(user.totalGames);
-        // setScore(user.score);
-        // setLastHeroChoice(user.lastGameHeroChoice);
-        // setLastVillainChoice(user.lastGameVillainChoice);
-        // setLastResult(user.lastGameResult);
     }
 
     function updateLastGameText(user: User){

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { User } from '../../Models/User';
 import { Config } from '../../config';
 
-export const Leaderboard = () => {
+export const Leaderboard: React.FC = () => {
 
     const [users, setUsers] = useState<User[]>([]);
 
