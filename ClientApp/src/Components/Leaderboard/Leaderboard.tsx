@@ -5,8 +5,13 @@ import { Config } from '../../Config';
 const Leaderboard: React.FC = () => {
 
     const [users, setUsers] = useState<User[]>([]);
+    const [usersLoaded, setUsersLoaded] = useState<boolean>(false);
 
     useEffect(() => {
+        if (usersLoaded) {
+            return;
+        }
+
         const fetchData = async () => {
             const response = await fetch(Config.apiBaseUrl + "leaderboard", {
                 method: "GET",
@@ -19,7 +24,8 @@ const Leaderboard: React.FC = () => {
         }
 
         fetchData();
-    })
+        setUsersLoaded(true);
+    }, [usersLoaded])
 
     return (
         <>
