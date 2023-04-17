@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Nav: React.FC = () => {
+const Nav: React.FC = () => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
