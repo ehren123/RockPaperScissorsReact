@@ -44,7 +44,7 @@ export const Play: React.FC = () => {
         updateLastGameText(user);
     }
 
-    function updateLastGameText(user: User){
+    function updateLastGameText(user: User): void{
         let text = 'Last Game: '
         if(user?.lastGameResult === GameResult.win){
             text+= 'You won! '
